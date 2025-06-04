@@ -52,7 +52,7 @@ class ProductDetailScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Provider.of<CartProvider>(context, listen: false)
-                      .addItem(product.id, product.price, product.name, product.imageUrl);
+                      .addItem(product);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Added item to cart!'),

@@ -38,7 +38,7 @@ class ProductItem extends StatelessWidget {
               ),
               color: Theme.of(context).colorScheme.secondary,
               onPressed: () {
-                product.toggleFavoriteStatus();
+                product.toggleFavorite();
               },
             ),
           ),
@@ -49,7 +49,7 @@ class ProductItem extends StatelessWidget {
           trailing: IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
-              cart.addItem(product.id, product.price, product.name, product.imageUrl);
+              cart.addItem(product);
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
