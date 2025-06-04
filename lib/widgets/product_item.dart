@@ -23,9 +23,8 @@ class ProductItem extends StatelessWidget {
           },
           child: Hero(
             tag: product.id,
-            child: FadeInImage(
-              placeholder: AssetImage('assets/images/product-placeholder.png'),
-              image: NetworkImage(product.imageUrl),
+            child: Image.asset(
+              product.imageUrl,
               fit: BoxFit.cover,
             ),
           ),
@@ -39,19 +38,18 @@ class ProductItem extends StatelessWidget {
               ),
               color: Theme.of(context).colorScheme.secondary,
               onPressed: () {
-                product.toggleFavorite();
+                product.toggleFavoriteStatus();
               },
             ),
           ),
           title: Text(
             product.name,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 12),
           ),
           trailing: IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
-              cart.addItem(product);
+              cart.addItem(product.id, product.price, product.name, product.imageUrl);
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

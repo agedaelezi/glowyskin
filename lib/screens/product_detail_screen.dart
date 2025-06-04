@@ -20,7 +20,7 @@ class ProductDetailScreen extends StatelessWidget {
               title: Text(product.name),
               background: Hero(
                 tag: product.id,
-                child: Image.network(
+                child: Image.asset(
                   product.imageUrl,
                   fit: BoxFit.cover,
                 ),
@@ -49,35 +49,19 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              ElevatedButton.icon(
-                icon: Icon(Icons.shopping_cart),
-                label: Text('ADD TO CART', style: TextStyle(color: Colors.black)),
+              ElevatedButton(
                 onPressed: () {
-                  Provider.of<CartProvider>(context, listen: false).addItem(product);
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  Provider.of<CartProvider>(context, listen: false)
+                      .addItem(product.id, product.price, product.name, product.imageUrl);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Added item to cart!'),
                       duration: Duration(seconds: 2),
-                      action: SnackBarAction(
-                        label: 'UNDO',
-                        onPressed: () {
-                          Provider.of<CartProvider>(context, listen: false)
-                              .removeSingleItem(product.id);
-                        },
-                      ),
                     ),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
+                child: Text('Add to Cart'),
               ),
-              SizedBox(height: 800),
             ]),
           ),
         ],
